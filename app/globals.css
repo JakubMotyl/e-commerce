@@ -1,20 +1,31 @@
 @import "tailwindcss";
 
-:root {
-  /* Tła */
-  --color-bg-main: #f4f4f0;
-  --color-bg-surface: #ffffff;
+@theme {
+  --font-main: var(--font-main), ui-sans-serif, system-ui, sans-serif;
+  --font-logo: var(--font-logo), ui-sans-serif, system-ui, sans-serif;
 
-  /* Tekst */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #6b6b6b;
+  --color-bone: #f4f4f0;
+  --color-white: #ffffff;
 
-  /* Akcenty / Elementy interaktywne */
-  --color-accent: #2e2e2e;
-  --color-accent-hover: #000000;
+  --color-black: #1a1a1a;
+  --color-pure-black: #000000;
+
+  --color-gray: #6b6b6b;
+  --color-graphite: #2e2e2e;
 }
 
 body {
-  background-color: var(--color-bg-main);
-  color: var(--color-text-primary);
+  /* background-color: var(--color-bone); */
+  background-color: var(--color-graphite);
+  color: var(--color-black);
+  font-family: var(--font-main);
+}
+
+@layer utilities {
+  .px-default {
+    @apply 2xl:px-20 xl:px-15 md:px-10 px-5;
+  }
+  .nav-link {
+    @apply xl:text-base text-sm cursor-pointer relative text-bone hover:text-white;
+  }
 }
