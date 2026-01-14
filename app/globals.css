@@ -17,7 +17,7 @@
 body {
   /* background-color: var(--color-bone); */
   background-color: var(--color-graphite);
-  color: var(--color-black);
+  color: var(--color-bone);
   font-family: var(--font-main);
 }
 
