@@ -26,6 +26,19 @@ body {
     @apply 2xl:px-20 xl:px-15 md:px-10 px-5;
   }
   .nav-link {
-    @apply xl:text-base text-sm cursor-pointer relative text-bone hover:text-white;
+    @apply relative xl:text-base text-sm cursor-pointer text-bone hover:text-white;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: var(--color-white);
+    transition: all 0.15s ease-in;
+  }
+  .nav-link:hover::after {
+    width: 100%;
   }
 }

@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${archivo.variable} ${montserrat.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );
