@@ -16,14 +16,17 @@
 
 body {
   /* background-color: var(--color-bone); */
-  background-color: var(--color-graphite);
+  background-color: var(--color-bone);
   color: var(--color-bone);
   font-family: var(--font-main);
 }
 
 @layer utilities {
   .px-default {
-    @apply 2xl:px-20 xl:px-15 md:px-10 px-5;
+    @apply 2xl:px-20 xl:px-16 md:px-10 px-5;
+  }
+  .py-default {
+    @apply py-24;
   }
   .nav-link {
     @apply relative xl:text-base text-sm cursor-pointer text-bone hover:text-white;

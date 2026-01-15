@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed inset-0 z-20 max-h-25 h-full">
+      <nav className="absolute inset-0 z-20 max-h-25 h-full">
         <div className="bg-pure-black text-white text-center py-1.5">
           <p className="lg:text-base sm:text-sm text-xs font-light">
             15% OFF everything. Code:{" "}
