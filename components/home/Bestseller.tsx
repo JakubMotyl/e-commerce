@@ -8,7 +8,7 @@ export default async function Bestseller() {
   return (
     <section className="px-default py-default flex flex-col gap-4">
       <p className="text-black font-semibold text-4xl">ONSKN BEST SELLERS</p>
-      <div className="grid">
+      <div className="grid w-full">
         <ProductCard />
         <ProductCard />
         <ProductCard />

@@ -7,11 +7,13 @@ const archivo = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
   variable: "--font-logo",
+  display: "swap",
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-main",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
