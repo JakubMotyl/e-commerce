@@ -1,11 +1,11 @@
-export const getBestSellers = async () => {
-  try {
-    const res = await fetch(
-      "https://makeup-api.herokuapp.com/api/v1/products.json"
-    );
-    const data = await res.json();
-    return data.slice(0, 3);
-  } catch (err) {
-    console.error(`Error fetching best sellers, ${err}`);
-  }
+import productsData from "@/lib/products.json";
+import type { Product } from "@/types";
+
+export const getBestSellers = async (): Promise<Product[]> => {
+  const data = productsData as Product[];
+  const selectedProducts = data.filter((item) =>
+    [996, 995, 993].includes(item.id)
+  );
+
+  return selectedProducts;
 };
