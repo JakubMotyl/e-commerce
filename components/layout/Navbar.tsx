@@ -37,8 +37,8 @@ export default function Navbar() {
         <header className="px-default flex justify-between py-5 lg:border-none border-b border-b-white">
           {/* Logo */}
           <div>
-            <span className="uppercase tracking-widest font-logo lg:text-9xl text-white lg:leading-24">
-              ONSK<span className="inline-block scale-x-[-1]">N</span>
+            <span className="uppercase font-logo lg:text-9xl text-white lg:leading-24">
+              OWN
             </span>
           </div>
 
@@ -104,7 +104,7 @@ export default function Navbar() {
 
       {/* Coupon message */}
       <div
-        className={`fixed bg-gray text-white bottom-5 py-2 px-3 rounded md:tex-base text-sm transition-all duration-200
+        className={`fixed z-20 bg-green-600 text-white bottom-5 py-2 px-3 rounded md:tex-base text-sm transition-all duration-200
         ${isCopied ? "right-5 opacity-100" : "-right-10 opacity-0"}`}
       >
         <p className="font-medium">Coupon copied!</p>

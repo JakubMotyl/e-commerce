@@ -6,9 +6,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <Suspense fallback={""}>
-        <Bestseller />
-      </Suspense>
+      <Bestseller />
     </div>
   );
 }
