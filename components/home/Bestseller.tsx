@@ -2,8 +2,8 @@ import ProductCard from "../shared/ProductCard";
 import { getBestSellers } from "@/lib/api";
 
 export default async function Bestseller() {
-  const products = await getBestSellers();
-  // console.log(products);
+  const data = await getBestSellers();
+  const products = data.slice(0, 3);
   return (
     <section className="px-default py-default flex flex-col md:gap-14 gap-10">
       <p className="text-black font-semibold xl:text-5xl md:text-4xl sm:text-3xl text-2xl">

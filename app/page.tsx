@@ -1,7 +1,7 @@
 import Hero from "@/components/home/Hero";
 import Bestseller from "@/components/home/Bestseller";
 import ProductSpotlight from "@/components/home/ProductSpotlight";
-import { Suspense } from "react";
+import Opinions from "@/components/home/Opinions";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
       <Hero />
       <Bestseller />
       <ProductSpotlight />
+      <Opinions />
     </div>
   );
 }
