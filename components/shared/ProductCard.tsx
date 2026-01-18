@@ -10,20 +10,20 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="h-108 w-full flex flex-col rounded overflow-hidden">
       <Link href={`/product/${product.id}`} className="h-[85%]">
         <img
-          src={product.image_link}
-          alt={product.name}
+          src={product.images[0]}
+          alt={product.title}
           className="h-full w-full object-center"
         />
       </Link>
       <div className="flex-1 flex flex-col gap-1">
         <div className="w-full flex-1">
-          <button className="w-full h-full bg-amber-700 hover:bg-amber-700/90 cursor-pointer duration-200 text-white">
+          <button className="w-full h-full bg-terracotta hover:bg-terracotta/90 cursor-pointer duration-200 text-white">
             Add to cart
           </button>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-black font-semibold md:text-sm text-xs">
-            {product.name}
+            {product.title}
           </p>
           <p className="text-black font-medium md:text-sm text-xs">
             {product.price} $
