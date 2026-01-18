@@ -19,7 +19,7 @@
 body {
   /* background-color: var(--color-bone); */
   background-color: var(--color-bone);
-  color: var(--color-bone);
+  color: var(--color-black);
   font-family: var(--font-main);
 }
 

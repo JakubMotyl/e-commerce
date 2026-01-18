@@ -14,7 +14,7 @@ function Hero() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/50 z-0"></div>
       {/* Text Content */}
-      <div className="z-10 w-full">
+      <div className="z-10 w-full text-white">
         <h1 className="md:block hidden font-semibold max-w-2xl text-[2.5rem]">
           DEFINE BEAUTY ON YOUR OWN TERMS WITH OWN.
         </h1>

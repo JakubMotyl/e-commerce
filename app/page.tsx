@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import Bestseller from "@/components/home/Bestseller";
+import ProductSpotlight from "@/components/home/ProductSpotlight";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
       <Hero />
       <Bestseller />
+      <ProductSpotlight />
     </div>
   );
 }
