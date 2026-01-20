@@ -46,4 +46,9 @@ body {
   .nav-link:hover::after {
     width: 100%;
   }
+  .opinions-container {
+    @apply flex items-center overflow-auto whitespace-nowrap gap-8;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
 }
