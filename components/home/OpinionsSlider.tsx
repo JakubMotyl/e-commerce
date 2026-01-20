@@ -11,17 +11,26 @@ interface OpinionSliderProps {
 
 export default function OpinionSlider({ products }: OpinionSliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  function getScrollAmount() {
+    if (!sliderRef.current) return 0;
+
+    const firstChild = sliderRef.current.children[0] as HTMLElement;
+    const containerStyle = window.getComputedStyle(sliderRef.current);
+    const gap = parseFloat(containerStyle.gap) || 0;
+
+    return firstChild.offsetWidth + gap;
+  }
+
   function scrollLeft() {
     if (sliderRef.current) {
-      const firstChild = sliderRef.current.children[0];
-      let scrollAmount = firstChild.clientWidth + 16;
+      const scrollAmount = getScrollAmount();
       sliderRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     }
   }
   function scrollRight() {
     if (sliderRef.current) {
-      const firstChild = sliderRef.current.children[0];
-      let scrollAmount = firstChild.clientWidth + 16;
+      const scrollAmount = getScrollAmount();
       sliderRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   }
