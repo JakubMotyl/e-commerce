@@ -1,5 +1,5 @@
 import { getBestSellers } from "@/lib/api";
-import OpinionSlider from "./OpinionSlider";
+import OpinionSlider from "./OpinionsSlider";
 
 export default async function Opinions() {
   const products = await getBestSellers();
