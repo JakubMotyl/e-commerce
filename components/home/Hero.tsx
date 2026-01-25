@@ -4,7 +4,7 @@ function Hero() {
   return (
     <section className="h-dvh relative w-full px-default py-default flex items-end">
       <Image
-        src="/images/hero.webp"
+        src="/images/hero_image.webp"
         alt="ONSKN campaign"
         fill
         priority
