@@ -33,7 +33,7 @@ body {
     @apply 2xl:py-24 py-20;
   }
   .nav-link {
-    @apply relative xl:text-base text-sm cursor-pointer text-bone hover:text-white;
+    @apply relative font-semibold md:text-sm text-xs cursor-pointer text-white;
   }
   .nav-link::after {
     content: "";

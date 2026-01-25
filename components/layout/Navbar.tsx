@@ -10,7 +10,7 @@ export default function Navbar() {
 
   const coupon = "HELLO2026";
 
-  const NAV_LINKS: string[] = ["Home", "Shop", "Our Story", "Shopping Bag"];
+  const NAV_LINKS: string[] = ["Home", "Shop", "About", "Shopping Bag"];
 
   const copyCoupon = () => {
     navigator.clipboard.writeText(coupon);
