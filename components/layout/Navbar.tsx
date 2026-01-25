@@ -94,7 +94,7 @@ export default function Navbar() {
                         {link}
                       </Link>
                     </li>
-                  )
+                  ),
                 )}
               </ul>
             </div>

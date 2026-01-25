@@ -14,6 +14,8 @@
   --color-graphite: #2e2e2e;
 
   --color-terracotta: #8c3926;
+
+  --color-highlight: #e8cda6;
 }
 
 body {
@@ -28,7 +30,7 @@ body {
     @apply 2xl:px-20 xl:px-16 md:px-10 px-5;
   }
   .py-default {
-    @apply py-24;
+    @apply 2xl:py-24 py-20;
   }
   .nav-link {
     @apply relative xl:text-base text-sm cursor-pointer text-bone hover:text-white;
@@ -50,5 +52,40 @@ body {
     @apply flex items-center overflow-auto whitespace-nowrap gap-8;
     scroll-behavior: smooth;
     scrollbar-width: none;
+  }
+  /* Footer */
+  .footer-col {
+    @apply flex flex-col items-start;
+  }
+  .footer-link {
+    @apply text-highlight hover:text-white duration-200 text-sm;
+  }
+  .checkbox {
+    position: relative;
+    appearance: none;
+    outline: 2px solid var(--color-highlight);
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    z-index: 0;
+  }
+  .checkbox::after {
+    position: absolute;
+    background-color: var(--color-highlight);
+    content: "";
+    width: 0;
+    height: 0;
+    border-radius: 2px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    z-index: -1;
+    transition: all 0.3s;
+  }
+  .checkbox:checked::after {
+    width: 16px;
+    height: 16px;
   }
 }
