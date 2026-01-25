@@ -1,5 +1,11 @@
+import Hero from "@/components/about/Hero";
+
 function page() {
-  return <main className="min-h-dvh">about page</main>;
+  return (
+    <div className="min-h-dvh">
+      <Hero />
+    </div>
+  );
 }
 
 export default page;
