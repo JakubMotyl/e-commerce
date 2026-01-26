@@ -88,4 +88,9 @@ body {
     width: 16px;
     height: 16px;
   }
+
+  /* About Page */
+  .text-img-wrapper {
+    @apply flex flex-col gap-20;
+  }
 }
