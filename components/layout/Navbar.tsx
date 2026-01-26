@@ -10,7 +10,12 @@ export default function Navbar() {
 
   const coupon = "HELLO2026";
 
-  const NAV_LINKS: string[] = ["Home", "Shop", "About", "Shopping Bag"];
+  const NAV_LINKS = [
+    { title: "Home", href_link: "#" },
+    { title: "Shop", href_link: "shop" },
+    { title: "About", href_link: "about" },
+    { title: "Shopping Bag" },
+  ];
 
   const copyCoupon = () => {
     navigator.clipboard.writeText(coupon);
@@ -22,7 +27,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="absolute overflow-hidden inset-0 z-20">
+      <nav className="overflow-hidden z-50">
         <div className="bg-pure-black text-white text-center py-1.5">
           <p className="lg:text-base sm:text-sm text-xs font-light">
             15% OFF everything. Code:{" "}
@@ -44,17 +49,17 @@ export default function Navbar() {
 
           {/* Nav List MD+ Devices */}
           <ul className="lg:flex hidden items-center gap-4 h-fit font-medium text-bone">
-            {NAV_LINKS.map((link, id) => (
+            {NAV_LINKS.map((item, id) => (
               <li key={id}>
-                {link === "Shopping Bag" ? (
+                {item.title === "Shopping Bag" ? (
                   <>
-                    <Link href="#" className="nav-link">
-                      {link} <span>(0)</span>
-                    </Link>
+                    <button className="nav-link">
+                      {item.title} <span>(0)</span>
+                    </button>
                   </>
                 ) : (
-                  <Link href="#" className="nav-link">
-                    {link}
+                  <Link href={`/${item.href_link}`} className="nav-link">
+                    {item.title}
                   </Link>
                 )}
               </li>
@@ -72,11 +77,11 @@ export default function Navbar() {
               Menu
             </li>
             <div
-              className={`absolute z-30 top-0 right-0 transition-all duration-500 ease-in-out h-dvh bg-graphite px-20 py-10 
+              className={`fixed top-0 right-0 transition-all duration-500 ease-in-out h-dvh bg-graphite px-20 py-10 
               ${
                 isOpen
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-full opacity-0"
+                  ? "translate-x-0 opacity-100 visible pointer-events-auto"
+                  : "translate-x-full opacity-0 invisible pointer-events-none"
               }`}
             >
               <div className="absolute top-3 left-3">
@@ -87,11 +92,11 @@ export default function Navbar() {
                 />
               </div>
               <ul className="flex flex-col gap-4 items-center">
-                {NAV_LINKS.filter((link) => link !== "Shopping Bag").map(
-                  (link, id) => (
+                {NAV_LINKS.filter((item) => item.title !== "Shopping Bag").map(
+                  (item, id) => (
                     <li key={id}>
-                      <Link href={""} className="nav-link">
-                        {link}
+                      <Link href={`/${item.href_link}`} className="nav-link">
+                        {item.title}
                       </Link>
                     </li>
                   ),

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Montserrat } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const archivo = Archivo({
@@ -32,7 +31,6 @@ export default function RootLayout({
       <body
         className={`${archivo.variable} ${montserrat.variable} antialiased`}
       >
-        <Navbar />
         <main>{children}</main>
         <Footer />
       </body>
