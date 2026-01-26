@@ -4,14 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 
-export default function Navbar() {
+export default function Navbar({ homePage }: { homePage: boolean }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const coupon = "HELLO2026";
 
   const NAV_LINKS = [
-    { title: "Home", href_link: "#" },
+    { title: "Home", href_link: "" },
     { title: "Shop", href_link: "shop" },
     { title: "About", href_link: "about" },
     { title: "Shopping Bag" },
@@ -30,9 +30,9 @@ export default function Navbar() {
       <nav className="overflow-hidden z-50">
         <div className="bg-pure-black text-white text-center py-1.5">
           <p className="lg:text-base sm:text-sm text-xs font-light">
-            15% OFF everything. Code:{" "}
+            15% OFF everything |{" "}
             <button
-              className="font-bold cursor-pointer"
+              className="font-semibold cursor-pointer"
               onClick={() => copyCoupon()}
             >
               {coupon}
@@ -42,23 +42,31 @@ export default function Navbar() {
         <header className="px-default flex justify-between py-5 lg:border-none border-b border-b-white">
           {/* Logo */}
           <div>
-            <span className="uppercase font-logo lg:text-9xl text-white lg:leading-24">
+            <Link
+              href={"/"}
+              className={`uppercase font-logo lg:text-9xl ${homePage ? "text-white" : "text-terracotta"} lg:leading-24`}
+            >
               OWN
-            </span>
+            </Link>
           </div>
 
           {/* Nav List MD+ Devices */}
-          <ul className="lg:flex hidden items-center gap-4 h-fit font-medium text-bone">
+          <ul className="lg:flex hidden items-center gap-4 h-fit">
             {NAV_LINKS.map((item, id) => (
               <li key={id}>
                 {item.title === "Shopping Bag" ? (
                   <>
-                    <button className="nav-link">
+                    <button
+                      className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
+                    >
                       {item.title} <span>(0)</span>
                     </button>
                   </>
                 ) : (
-                  <Link href={`/${item.href_link}`} className="nav-link">
+                  <Link
+                    href={`/${item.href_link}`}
+                    className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
+                  >
                     {item.title}
                   </Link>
                 )}
@@ -67,14 +75,17 @@ export default function Navbar() {
           </ul>
 
           {/* Nav List MD- Devices */}
-          <ul className="lg:hidden flex items-center gap-4 h-fit font-medium text-bone">
-            <li>
-              <Link href={"#"} className="nav-link">
-                Shopping Bag <span>(0)</span>
-              </Link>
-            </li>
-            <li className="nav-link" onClick={() => setIsOpen(true)}>
-              Menu
+          <ul className="lg:hidden flex items-center gap-4 h-fit">
+            <Link
+              href={"#"}
+              className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
+            >
+              Shopping Bag <span>(0)</span>
+            </Link>
+            <li
+              className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
+            >
+              <button onClick={() => setIsOpen(true)}>Menu</button>
             </li>
             <div
               className={`fixed top-0 right-0 transition-all duration-500 ease-in-out h-dvh bg-graphite px-20 py-10 
@@ -87,7 +98,7 @@ export default function Navbar() {
               <div className="absolute top-3 left-3">
                 <IoClose
                   size={24}
-                  className="cursor-pointer hover:scale-95 active:scale-95 duration-200"
+                  className="cursor-pointer text-white"
                   onClick={() => setIsOpen(false)}
                 />
               </div>
@@ -95,7 +106,10 @@ export default function Navbar() {
                 {NAV_LINKS.filter((item) => item.title !== "Shopping Bag").map(
                   (item, id) => (
                     <li key={id}>
-                      <Link href={`/${item.href_link}`} className="nav-link">
+                      <Link
+                        href={`/${item.href_link}`}
+                        className="nav-link text-white after:bg-white"
+                      >
                         {item.title}
                       </Link>
                     </li>

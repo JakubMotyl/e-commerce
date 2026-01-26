@@ -33,7 +33,7 @@ body {
     @apply 2xl:py-24 py-20;
   }
   .nav-link {
-    @apply relative font-semibold md:text-sm text-xs cursor-pointer text-white;
+    @apply relative font-semibold md:text-sm text-xs cursor-pointer;
   }
   .nav-link::after {
     content: "";
@@ -42,7 +42,6 @@ body {
     left: 0;
     width: 0%;
     height: 1px;
-    background: var(--color-white);
     transition: all 0.15s ease-in;
   }
   .nav-link:hover::after {

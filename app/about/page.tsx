@@ -4,7 +4,7 @@ import Hero from "@/components/about/Hero";
 function page() {
   return (
     <div className="min-h-dvh">
-      <Navbar />
+      <Navbar homePage={false} />
       <Hero />
     </div>
   );

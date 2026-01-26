@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <div className="h-dvh relative bg-[url('/images/hero_image.webp')] bg-no-repeat bg-cover flex flex-col">
         <div className="absolute inset-0 bg-black/30"></div>
-        <Navbar />
+        <Navbar homePage={true} />
         <Hero />
       </div>
       <Bestseller />
