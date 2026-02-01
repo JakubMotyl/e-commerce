@@ -1,7 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/about/Hero";
+import Hero from "@/components/shop/Hero";
 
-function page() {
+export default function page() {
   return (
     <>
       <Navbar homePage={false} />
@@ -9,5 +9,3 @@ function page() {
     </>
   );
 }
-
-export default page;
