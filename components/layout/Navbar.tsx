@@ -85,31 +85,33 @@ export default function Navbar({ homePage }: { homePage: boolean }) {
             <li
               className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
             >
-              <button onClick={() => setIsOpen(true)}>Menu</button>
+              <button onClick={() => setIsOpen(true)} className="nav-link">
+                Menu
+              </button>
             </li>
             <div
-              className={`fixed top-0 right-0 transition-all duration-500 ease-in-out h-dvh bg-graphite px-20 py-10 
+              className={`fixed z-100 top-0 right-0 transition-all duration-300 ease-in-out h-dvh w-full bg-terracotta flex items-center justify-center
               ${
                 isOpen
                   ? "translate-x-0 opacity-100 visible pointer-events-auto"
                   : "translate-x-full opacity-0 invisible pointer-events-none"
               }`}
             >
-              <div className="absolute top-3 left-3">
+              <div className="absolute top-5 left-5">
                 <IoClose
-                  size={24}
+                  size={48}
                   className="cursor-pointer text-white"
                   onClick={() => setIsOpen(false)}
                 />
               </div>
-              <ul className="flex flex-col gap-4 items-center">
+              <ul className="flex flex-col divide-y divide-white items-center w-full">
                 {NAV_LINKS.filter((item) => item.title !== "Shopping Bag").map(
                   (item, id) => (
-                    <li key={id}>
-                      <Link
-                        href={`/${item.href_link}`}
-                        className="nav-link text-white after:bg-white"
-                      >
+                    <li
+                      key={id}
+                      className="w-full inline-block text-center py-4 h-full text-white hover:text-terracotta hover:bg-white cursor-pointer"
+                    >
+                      <Link href={`/${item.href_link}`} className="nav-link ">
                         {item.title}
                       </Link>
                     </li>
