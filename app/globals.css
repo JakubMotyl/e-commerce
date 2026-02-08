@@ -110,4 +110,10 @@ body {
     background: var(--color-gray);
     border-radius: 8px;
   }
+  .sort-el {
+    @apply flex items-center gap-4 w-full cursor-pointer;
+  }
+  .sort-name {
+    @apply md:text-xs text-[0.625rem] font-medium text-center;
+  }
 }
