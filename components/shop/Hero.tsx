@@ -12,8 +12,19 @@ type HeroProps = {
 export default function Hero({ products }: HeroProps) {
   const [sortProducts, setSortProducts] = useState("Default");
 
+  const sortedProducts = [...products];
+
+    if (sortProducts === 'Price - low to high') {
+      sortedProducts.sort((a,b) => a.price - b.price);
+    }
+    if (sortProducts === 'Price - high to low') {
+      sortedProducts.sort((a,b) => b.price - a.price);
+    }
+
+
+
   return (
-    <main className="py-default">
+    <section className="py-default">
       <h1 className="text-4xl md:text-5xl font-semibold text-terracotta text-left w-full xl:px-16 2xl:px-20 px-5">
         Shop
       </h1>
@@ -23,8 +34,8 @@ export default function Hero({ products }: HeroProps) {
           sortProducts={sortProducts}
           setSortProducts={setSortProducts}
         />
-        <ShopItems sortProducts={sortProducts} />
+        <ShopItems products={sortedProducts} />
       </section>
-    </main>
+    </section>
   );
 }

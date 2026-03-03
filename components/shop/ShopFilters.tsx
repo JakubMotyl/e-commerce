@@ -8,7 +8,10 @@ interface ShopFiltersProps {
   sortProducts: string;
 }
 
-function ShopFilters({ setSortProducts, sortProducts }: ShopFiltersProps) {
+function ShopFilters({
+  setSortProducts,
+  sortProducts,
+}: ShopFiltersProps) {
   const [openSortMenu, setOpenSortMenu] = useState<boolean>(false);
 
   return (
@@ -18,7 +21,7 @@ function ShopFilters({ setSortProducts, sortProducts }: ShopFiltersProps) {
           <GoPlus className="cursor-pointer" />
           <span>Filters</span>
         </div>
-        <button className="reset-btn">Reset all</button>
+        <button className="reset-btn" onClick={() => setSortProducts('Default')}>Reset all</button>
       </div>
       <div
         className="flex items-center gap-2 relative group cursor-pointer"
