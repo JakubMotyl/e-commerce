@@ -5,3 +5,14 @@ export const getBestSellers = async (): Promise<Product[]> => {
   const data = await res.json();
   return data.products;
 };
+
+export const getProductById = async (id: string) => {
+  try {
+    const res = await fetch(`https://dummyjson.com/products/${id}`);
+    const data = await res.json();
+    return data;
+  }
+  catch (err) {
+    console.error(err)
+  }
+}
