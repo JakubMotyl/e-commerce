@@ -116,4 +116,12 @@ body {
   .sort-name {
     @apply md:text-xs text-[0.625rem] font-medium text-center;
   }
+
+  /* Shopping Cart (Bag) */
+  .cart-box {
+    @apply flex flex-col border border-terracotta w-full p-4;
+  }
+  .cart-box-text {
+    @apply text-sm font-semibold;
+  }
 }
