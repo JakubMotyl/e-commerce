@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import type { Product } from "@/types";
+import { useCartStore } from "@/store/useCartStore";
 
 export default function HeroDescription({ product }: { product: Product }) {
     const [quantity, setQuantity] = useState(1);
     const [openSection, setOpenSection] = useState<string | null>("benefits");
+
+    const addProduct = useCartStore(state => state.addProduct)
 
     const toggleSection = (section: string) => {
         setOpenSection(openSection === section ? null : section);
@@ -82,7 +85,9 @@ export default function HeroDescription({ product }: { product: Product }) {
                         +
                     </button>
                 </div>
-                <button className="flex-1 bg-pure-black border border-pure-black hover:bg-transparent hover:text-pure-black font-medium duration-200 uppercase text-white text-sm h-full cursor-pointer">
+                <button className="flex-1 bg-pure-black border border-pure-black hover:bg-transparent hover:text-pure-black font-medium duration-200 uppercase text-white text-sm h-full cursor-pointer"
+                    onClick={() => addProduct(product, quantity)}
+                >
                     Add to bag
                 </button>
             </div>

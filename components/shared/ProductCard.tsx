@@ -1,3 +1,5 @@
+"use client"
+/* eslint-disable @next/next/no-img-element */
 import { useCartStore } from "@/store/useCartStore";
 import type { Product } from "@/types";
 import Link from "next/link";
@@ -7,7 +9,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-
+  const addProduct = useCartStore(state => state.addProduct)
   return (
     <div className="flex flex-col rounded overflow-hidden mx-auto">
       <Link
@@ -23,6 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="flex-1 flex flex-col gap-1.5">
         <div className="w-full flex-1">
           <button className="w-full h-full bg-terracotta hover:bg-black cursor-pointer transition-all duration-300 text-white"
+            onClick={() => addProduct(product, 1)}
           >
             Select
           </button>
@@ -36,6 +39,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           </p>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

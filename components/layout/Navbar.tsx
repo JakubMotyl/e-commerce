@@ -1,5 +1,5 @@
 "use client";
-
+import { useCartStore } from "@/store/useCartStore";
 import { useState } from "react";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 export default function Navbar({ homePage }: { homePage: boolean }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const itemsQuantity = useCartStore(state => state.productsList.length);
 
   const coupon = "HELLO2026";
 
@@ -14,7 +15,7 @@ export default function Navbar({ homePage }: { homePage: boolean }) {
     { title: "Home", href_link: "" },
     { title: "Shop", href_link: "shop" },
     { title: "About", href_link: "about" },
-    { title: "Shopping Bag" },
+    { title: "Shopping Bag", href_link: 'cart' },
   ];
 
   const copyCoupon = () => {
@@ -56,11 +57,12 @@ export default function Navbar({ homePage }: { homePage: boolean }) {
               <li key={id}>
                 {item.title === "Shopping Bag" ? (
                   <>
-                    <button
+                    <Link
+                      href={`/${item.href_link}`}
                       className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
                     >
-                      {item.title} <span>(0)</span>
-                    </button>
+                      {item.title} <span>({itemsQuantity})</span>
+                    </Link>
                   </>
                 ) : (
                   <Link
@@ -77,10 +79,10 @@ export default function Navbar({ homePage }: { homePage: boolean }) {
           {/* Nav List MD- Devices */}
           <ul className="lg:hidden flex items-center gap-4 h-fit">
             <Link
-              href={"#"}
+              href={`/cart`}
               className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
             >
-              Shopping Bag <span>(0)</span>
+              Shopping Bag <span>({itemsQuantity})</span>
             </Link>
             <li
               className={`nav-link ${homePage ? "text-white after:bg-white" : "text-black after:bg-black"}`}
@@ -91,11 +93,10 @@ export default function Navbar({ homePage }: { homePage: boolean }) {
             </li>
             <div
               className={`fixed z-100 top-0 right-0 transition-all duration-300 ease-in-out h-dvh w-full bg-terracotta flex items-center justify-center
-              ${
-                isOpen
+              ${isOpen
                   ? "translate-x-0 opacity-100 visible pointer-events-auto"
                   : "translate-x-full opacity-0 invisible pointer-events-none"
-              }`}
+                }`}
             >
               <div className="absolute top-5 left-5">
                 <IoClose
