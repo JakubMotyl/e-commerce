@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { useCartStore } from "@/store/useCartStore"
-import { useState } from "react";
 
 export default function ProductsList() {
-    const [quantity, setQuantity] = useState(1);
+    const updateQuantity = useCartStore(state => state.updateQuantity)
     const productsList = useCartStore((state) => state.productsList);
     return (
         <>
@@ -22,14 +21,14 @@ export default function ProductsList() {
                                 </div>
                                 <div className="flex items-center">
                                     <button
-                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                        onClick={() => updateQuantity(item.product.id, 'decrease')}
                                         className="text-xl text-pure-black cursor-pointer w-6 h-6 border border-terracotta flex items-center justify-center"
                                     >
                                         -
                                     </button>
                                     <span className="cart-box-text w-10 text-center">{item.quantity}</span>
                                     <button
-                                        onClick={() => setQuantity(quantity + 1)}
+                                        onClick={() => updateQuantity(item.product.id, 'increase')}
                                         className="text-xl text-pure-black cursor-pointer w-6 h-6 border border-terracotta flex items-center justify-center"
                                     >
                                         +

@@ -5,6 +5,7 @@ type ProductsStore = {
     productsList: CartItem[];
     addProduct: (product: Product, quantity: number) => void;
     removeProduct: (id: number) => void;
+    updateQuantity: (id: number, action: 'increase' | 'decrease') => void;
 };
 
 type CartItem = {
@@ -49,4 +50,24 @@ export const useCartStore = create<ProductsStore>((set) => ({
             }
         })
     },
+    updateQuantity: (id: number, action: 'increase' | 'decrease') => {
+        set(state => {
+            const updatedList = state.productsList.map(element => {
+                if (element.product.id === id) {
+                    if (action === 'decrease' && element.quantity === 1) {
+                        return element;
+                    }
+                    return {
+                        ...element,
+                        quantity: action === 'increase' ? element.quantity + 1 : element.quantity - 1
+                    }
+                } else {
+                    return element;
+                }
+            })
+            return {
+                productsList: updatedList
+            }
+        })
+    }
 }));
