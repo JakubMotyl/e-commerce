@@ -122,6 +122,6 @@ body {
     @apply flex flex-col border border-terracotta w-full p-4;
   }
   .cart-box-text {
-    @apply text-sm font-semibold;
+    @apply md:text-base text-sm font-semibold;
   }
 }
