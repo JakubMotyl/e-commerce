@@ -1,78 +1,106 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import type { Product } from '@/types';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { Product } from "@/types";
 
 type ProductsStore = {
     productsList: CartItem[];
     addProduct: (product: Product, quantity: number) => void;
     removeProduct: (id: number) => void;
-    updateQuantity: (id: number, action: 'increase' | 'decrease') => void;
+    updateQuantity: (id: number, action: "increase" | "decrease") => void;
+    appliedCode: string | null;
+    discount: number;
+    applyDiscount: (discount: number, codeName: string) => void;
+    promotedCoupon: string;
 };
 
 type CartItem = {
     product: Product;
     quantity: number;
-}
-
+};
 
 export const useCartStore = create<ProductsStore>()(
-    persist((set) => ({
-        productsList: [],
-        addProduct: (product: Product, quantity: number) => {
-            set((state) => {
-                const inCart = state.productsList.find(item => item.product.id === product.id)
+    persist(
+        (set) => ({
+            productsList: [],
+            addProduct: (product: Product, quantity: number) => {
+                set((state) => {
+                    const inCart = state.productsList.find(
+                        (item) => item.product.id === product.id,
+                    );
 
-                if (inCart) {
-                    const updatedList = state.productsList.map(element => {
-                        if (element.product.id === product.id) {
+                    if (inCart) {
+                        const updatedList = state.productsList.map(
+                            (element) => {
+                                if (element.product.id === product.id) {
+                                    return {
+                                        ...element,
+                                        quantity: element.quantity + quantity,
+                                    };
+                                } else {
+                                    return element;
+                                }
+                            },
+                        );
+                        return {
+                            productsList: updatedList,
+                        };
+                    } else {
+                        return {
+                            productsList: [
+                                ...state.productsList,
+                                { product, quantity },
+                            ],
+                        };
+                    }
+                });
+            },
+            removeProduct: (id: number) => {
+                set((state) => {
+                    return {
+                        productsList: state.productsList.filter(
+                            (item) => item.product.id !== id,
+                        ),
+                    };
+                });
+            },
+            updateQuantity: (id: number, action: "increase" | "decrease") => {
+                set((state) => {
+                    const updatedList = state.productsList.map((element) => {
+                        if (element.product.id === id) {
+                            if (
+                                action === "decrease" &&
+                                element.quantity === 1
+                            ) {
+                                return element;
+                            }
                             return {
                                 ...element,
-                                quantity: element.quantity + quantity,
-                            }
+                                quantity:
+                                    action === "increase"
+                                        ? element.quantity + 1
+                                        : element.quantity - 1,
+                            };
                         } else {
                             return element;
                         }
-                    })
+                    });
                     return {
-                        productsList: updatedList
-                    }
-                } else {
+                        productsList: updatedList,
+                    };
+                });
+            },
+            discount: 0,
+            appliedCode: null,
+            applyDiscount: (discount: number, codeName: string) => {
+                set((state) => {
                     return {
-                        productsList: [
-                            ...state.productsList,
-                            { product, quantity }
-                        ]
-                    }
-                }
-            })
-        },
-        removeProduct: (id: number) => {
-            set((state) => {
-                return {
-                    productsList: state.productsList.filter(item => item.product.id !== id)
-                }
-            })
-        },
-        updateQuantity: (id: number, action: 'increase' | 'decrease') => {
-            set(state => {
-                const updatedList = state.productsList.map(element => {
-                    if (element.product.id === id) {
-                        if (action === 'decrease' && element.quantity === 1) {
-                            return element;
-                        }
-                        return {
-                            ...element,
-                            quantity: action === 'increase' ? element.quantity + 1 : element.quantity - 1
-                        }
-                    } else {
-                        return element;
-                    }
-                })
-                return {
-                    productsList: updatedList
-                }
-            })
-        }
-    }),
-        { name: 'own-shop-cart' })
+                        discount,
+                        appliedCode: codeName,
+                    };
+                });
+            },
+            promotedCoupon: "2026",
+        }),
+        { name: "own-shop-cart" },
+    ),
 );
