@@ -5,6 +5,8 @@ import { useState } from "react";
 export default function PaymentDetails() {
     const productsList = useCartStore((state) => state.productsList);
 
+    const [isCouponLoading, setIsCouponLoading] = useState(false);
+    const [error, setError] = useState("");
     const [couponCode, setCouponCode] = useState("");
 
     const subtotal = productsList.reduce((acc, item) => {
@@ -12,6 +14,28 @@ export default function PaymentDetails() {
     }, 0);
 
     if (productsList.length === 0) return null;
+
+    const handleApplyCoupon = async () => {
+        try {
+            const response = await fetch("/api/coupons", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ code: couponCode }),
+            });
+
+            if (!response.ok) {
+                setError("This code does not exist");
+                return;
+            }
+            const code = await response.json();
+            console.log("The coupon is", code.discount);
+            setCouponCode("");
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
         <div className="bg-white border border-terracotta/30 p-6 xl:p-8 flex flex-col gap-6 w-full shadow-sm">
@@ -49,7 +73,10 @@ export default function PaymentDetails() {
                             placeholder="Enter code"
                             className="w-full border border-terracotta/50 border-r-0 px-3 text-sm outline-none focus:border-terracotta text-pure-black placeholder:text-gray/50 transition-colors"
                         />
-                        <button className="bg-pure-black text-white px-5 text-xs font-semibold uppercase hover:bg-terracotta transition-colors duration-300 cursor-pointer">
+                        <button
+                            className="bg-pure-black text-white px-5 text-xs font-semibold uppercase hover:bg-terracotta transition-colors duration-300 cursor-pointer"
+                            onClick={handleApplyCoupon}
+                        >
                             Apply
                         </button>
                     </div>
