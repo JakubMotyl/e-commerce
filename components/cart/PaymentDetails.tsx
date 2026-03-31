@@ -20,22 +20,23 @@ export default function PaymentDetails() {
             </h2>
 
             <div className="flex flex-col gap-4 border-b border-b-terracotta/30 pb-6">
-                <div className="flex justify-between text-pure-black text-sm">
+                <div className="flex justify-between text-pure-black lg:text-base text-sm">
                     <span className="font-medium">Subtotal</span>
                     <span className="font-semibold">
                         ${subtotal.toFixed(2)}
                     </span>
                 </div>
-                <div className="flex justify-between text-gray text-sm">
-                    <span>Shipping</span>
-                    <span>Calculated at checkout</span>
+
+                {/* IF COUPON CODE IS APPLIED */}
+                <div className="flex justify-between text-pure-black lg:text-base text-sm">
+                    <span className="font-medium">Discount</span>
+                    <span className="font-semibold text-green-600">-40$</span>
                 </div>
 
-                {/* --- MIEJSCE NA KUPON --- */}
                 <div className="flex flex-col gap-2 mt-2 pt-4 border-t border-t-terracotta/10">
                     <label
                         htmlFor="coupon"
-                        className="text-xs font-semibold uppercase text-pure-black"
+                        className="lg:text-sm text-xs font-semibold uppercase text-pure-black"
                     >
                         Discount Code
                     </label>
@@ -46,7 +47,7 @@ export default function PaymentDetails() {
                             value={couponCode}
                             onChange={(e) => setCouponCode(e.target.value)}
                             placeholder="Enter code"
-                            className="flex-1 border border-terracotta/50 border-r-0 px-3 text-sm outline-none focus:border-terracotta text-pure-black placeholder:text-gray/50 transition-colors"
+                            className="w-full border border-terracotta/50 border-r-0 px-3 text-sm outline-none focus:border-terracotta text-pure-black placeholder:text-gray/50 transition-colors"
                         />
                         <button className="bg-pure-black text-white px-5 text-xs font-semibold uppercase hover:bg-terracotta transition-colors duration-300 cursor-pointer">
                             Apply
@@ -65,10 +66,6 @@ export default function PaymentDetails() {
             <button className="w-full bg-terracotta text-white py-4 uppercase font-semibold text-sm hover:bg-pure-black transition-colors duration-300 cursor-pointer">
                 Proceed to Checkout
             </button>
-
-            <p className="text-xs text-gray text-center mt-2">
-                Taxes and discount codes calculated at checkout.
-            </p>
         </div>
     );
 }
