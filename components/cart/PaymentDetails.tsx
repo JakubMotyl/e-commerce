@@ -1,6 +1,7 @@
 "use client";
 import { useCartStore } from "@/store/useCartStore";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function PaymentDetails() {
     const productsList = useCartStore((state) => state.productsList);
@@ -130,9 +131,12 @@ export default function PaymentDetails() {
                 </span>
             </div>
 
-            <button className="w-full bg-terracotta text-white py-4 uppercase font-semibold text-sm hover:bg-pure-black transition-colors duration-300 cursor-pointer">
+            <Link
+                href={"/checkout"}
+                className="w-full flex justify-center bg-terracotta text-white py-4 uppercase font-semibold text-sm hover:bg-pure-black transition-colors duration-300 cursor-pointer"
+            >
                 Proceed to Checkout
-            </button>
+            </Link>
         </div>
     );
 }
