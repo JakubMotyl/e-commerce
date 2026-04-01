@@ -1,9 +1,8 @@
-import HeroDescription from "./HeroDescription"
-import ProductSpotlight from "../home/ProductSpotlight"
-import { Product } from "@/types"
+import HeroDescription from "./HeroDescription";
+import ProductSpotlight from "../home/ProductSpotlight";
+import { Product } from "@/types";
 
 export default function Hero({ product }: { product: Product }) {
-    console.log(product)
     return (
         <section>
             <div className="px-default py-default flex flex-col lg:flex-row gap-10 lg:gap-20 w-full">
@@ -23,5 +22,5 @@ export default function Hero({ product }: { product: Product }) {
                 <ProductSpotlight />
             </div>
         </section>
-    )
+    );
 }
