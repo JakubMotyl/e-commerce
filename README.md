@@ -1,5 +1,15 @@
 # OWN – Minimalist E-commerce Store
 
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-%2320232a.svg?logo=react&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+
 **OWN.** is a modern, responsive e-commerce application built with **Next.js**, focusing on minimalist design for the beauty/skincare industry. The project demonstrates a complex architecture combining external data sources with a custom cloud database and persistent state management.
 
 ## Design Inspiration
@@ -17,10 +27,11 @@ View the live project here: [OWN](https://e-commerce-delta-nine-14.vercel.app/)
 - **Framework:** Next.js
 - **Language:** TypeScript
 - **Database:** PostgreSQL (Supabase)
-- **ORM:** Prisma 7
+- **ORM:** Prisma
 - **Styling:** Tailwind CSS
 - **State Management:** Zustand + LocalStorage Persistence
 - **External API:** DummyJSON (Product Catalog)
+- **Testing:** Vitest
 
 ---
 
@@ -97,6 +108,23 @@ npx prisma generate
 
 ```bash
 npm run dev
+```
+
+---
+
+## Testing
+
+This project includes a unit testing setup to ensure the reliability of core business logic.
+
+### Testing Strategies
+
+- **Zustand State:** Tests for the global state (`useCartStore`). The store is reset before each test suite to prevent state leaks between tests.
+- **API Mocking:** The global `fetch` API is mocked to simulate both successful data fetching and failure scenario.
+
+Execute the test suite:
+
+```bash
+npm run test
 ```
 
 ---
