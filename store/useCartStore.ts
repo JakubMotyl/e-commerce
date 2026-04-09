@@ -11,6 +11,7 @@ type ProductsStore = {
     discount: number;
     applyDiscount: (discount: number, codeName: string) => void;
     promotedCoupon: string;
+    getTotals: () => { subtotal: string; finalTotal: string };
 };
 
 type CartItem = {
@@ -20,7 +21,7 @@ type CartItem = {
 
 export const useCartStore = create<ProductsStore>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             productsList: [],
             addProduct: (product: Product, quantity: number) => {
                 set((state) => {
@@ -100,6 +101,20 @@ export const useCartStore = create<ProductsStore>()(
                 });
             },
             promotedCoupon: "2026",
+            getTotals: () => {
+                const { productsList, discount } = get();
+
+                const subtotal = productsList.reduce((acc, item) => {
+                    return acc + item.product.price * item.quantity;
+                }, 0);
+
+                const finalTotal = Math.max(0, subtotal - discount);
+
+                return {
+                    subtotal: subtotal.toFixed(2),
+                    finalTotal: finalTotal.toFixed(2),
+                };
+            },
         }),
         { name: "own-shop-cart" },
     ),

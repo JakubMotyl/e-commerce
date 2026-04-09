@@ -2,22 +2,20 @@
 import { useCartStore } from "@/store/useCartStore";
 import { useState } from "react";
 import Link from "next/link";
+import { useShallow } from "zustand/shallow";
 
 export default function PaymentDetails() {
     const productsList = useCartStore((state) => state.productsList);
     const applyDiscount = useCartStore((state) => state.applyDiscount);
     const appliedCode = useCartStore((state) => state.appliedCode);
     const discount = useCartStore((state) => state.discount);
+    const { subtotal, finalTotal } = useCartStore(
+        useShallow((state) => state.getTotals()),
+    );
 
     const [isCouponLoading, setIsCouponLoading] = useState(false);
     const [error, setError] = useState("");
     const [couponCode, setCouponCode] = useState("");
-
-    const subtotal = productsList.reduce((acc, item) => {
-        return acc + item.product.price * item.quantity;
-    }, 0);
-
-    const finalTotal = Math.max(0, subtotal - discount).toFixed(2);
 
     if (productsList.length === 0) return null;
 
@@ -64,9 +62,7 @@ export default function PaymentDetails() {
             <div className="flex flex-col gap-4 border-b border-b-terracotta/30 pb-6">
                 <div className="flex justify-between text-pure-black lg:text-base text-sm">
                     <span className="font-medium">Subtotal</span>
-                    <span className="font-semibold">
-                        ${subtotal.toFixed(2)}
-                    </span>
+                    <span className="font-semibold">${subtotal}</span>
                 </div>
 
                 {/* IF COUPON CODE IS APPLIED */}
