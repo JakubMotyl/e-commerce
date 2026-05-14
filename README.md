@@ -42,6 +42,7 @@ View the live project here: [OWN](https://e-commerce-delta-nine-14.vercel.app/)
 - **External Product Catalog:** All product data, including categories and descriptions, are fetched in real-time from the **DummyJSON API**.
 - **Cloud Database (PostgreSQL):** Promotional logic and coupon validation are handled by a custom **Supabase** database.
 - **Serverless Route Handlers:** The backend logic is built using **Next.js Route Handlers (API Routes)**, providing a secure bridge between the frontend and the database.
+- **Complete Checkout Flow:** Features strict client-side form validation, database insertion via Prisma, generating unique order numbers, and dynamic routing to a success page.
 
 ### Advanced State Management (Zustand)
 
@@ -49,10 +50,11 @@ The entire store logic is powered by **Zustand** with **LocalStorage persistence
 
 - **Persistent Cart:** Products added to the bag remain there even after refreshing the page or closing the browser.
 - **Store Logic:** Seamlessly handles adding/removing items, quantity updates, and calculating subtotals.
-- **Dynamic Coupons:** Promotional codes are fetched via a custom API route (`/api/coupons`) and stored in the global state to apply discounts across the entire checkout process.
+- **Lifecycle Management:** Securely clears the global state and local storage upon successful order verification.
 
-### Premium UX/UI
+### Premium UX & Accessibility (A11y)
 
+- **Accessibility-First Approach:** Fully semantic HTML architecture with deep integration of ARIA attributes (`aria-invalid`, `aria-describedby`, `aria-label`).
 - **Responsive Design:** Fully optimized for all screen sizes with a custom mobile navigation and touch-friendly interface.
 - **Interactive Filters:** Client-side sorting and filtering for immediate user feedback.
 
@@ -60,13 +62,27 @@ The entire store logic is powered by **Zustand** with **LocalStorage persistence
 
 ## Database Schema (Prisma)
 
-The promotional system relies on a relational model to ensure data integrity:
+The promotional system relies on a relational model to ensure data integrity and secure order storage:
 
 ```prisma
 model Coupon {
   id       String @id @default(uuid())
   name     String @unique
   discount Int
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  orderNumber Int      @unique @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String
+  address     String
+  apartment   String?
+  city        String
+  postalCode  String
+  price       Int      // Stored in cents (e.g. 5497 = $54.97)
+  createdAt   DateTime @default(now())
 }
 ```
 
