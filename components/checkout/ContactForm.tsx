@@ -6,23 +6,26 @@ import { useCartStore } from "@/store/useCartStore";
 import type { formData } from "@/types";
 import { useRouter } from "next/navigation";
 
-function ContactForm() {
-    const emptyFormData: formData = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        address: "",
-        apartment: "",
-        city: "",
-        postalCode: "",
-    };
+const emptyFormData: formData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    apartment: "",
+    city: "",
+    postalCode: "",
+};
 
+function ContactForm() {
     // Get total price of products after discount and convert to Int
     // eg. $44.97 -> 4497 in database
     const getTotals = useCartStore((state) => state.getTotals);
     const finalTotal = Number(getTotals().finalTotal) * 100;
+
     const [formData, setFormData] = useState<formData>(emptyFormData);
     const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const clearCart = useCartStore((state) => state.clearCart);
 
     // Init useRouter
     const router = useRouter();
@@ -55,7 +58,11 @@ function ContactForm() {
 
             const data = await response.json();
 
+            // Custom success URL for specific order number
             router.push(`/checkout/success?orderId=${data.orderNumber}`);
+
+            // After successful fetch, we reset the whole cart
+            clearCart();
         } catch (err) {
             console.error(err);
         }

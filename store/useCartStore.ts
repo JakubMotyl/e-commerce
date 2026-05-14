@@ -12,6 +12,7 @@ type ProductsStore = {
     applyDiscount: (discount: number, codeName: string) => void;
     promotedCoupon: string;
     getTotals: () => { subtotal: string; finalTotal: string };
+    clearCart: () => void;
 };
 
 type CartItem = {
@@ -19,10 +20,16 @@ type CartItem = {
     quantity: number;
 };
 
+const initialState = {
+    productsList: [],
+    appliedCode: null,
+    discount: 0,
+};
+
 export const useCartStore = create<ProductsStore>()(
     persist(
         (set, get) => ({
-            productsList: [],
+            ...initialState,
             addProduct: (product: Product, quantity: number) => {
                 set((state) => {
                     const inCart = state.productsList.find(
@@ -90,8 +97,6 @@ export const useCartStore = create<ProductsStore>()(
                     };
                 });
             },
-            discount: 0,
-            appliedCode: null,
             applyDiscount: (discount: number, codeName: string) => {
                 set((state) => {
                     return {
@@ -114,6 +119,9 @@ export const useCartStore = create<ProductsStore>()(
                     subtotal: subtotal.toFixed(2),
                     finalTotal: finalTotal.toFixed(2),
                 };
+            },
+            clearCart: () => {
+                set(initialState);
             },
         }),
         { name: "own-shop-cart" },
