@@ -57,6 +57,7 @@ export default function ProductsList() {
                                                         "decrease",
                                                     )
                                                 }
+                                                aria-label={`Decrease quantity of ${product.product.title}`}
                                                 className="text-xl text-pure-black cursor-pointer w-8 h-full flex items-center justify-center hover:bg-highlight transition-colors"
                                             >
                                                 -
@@ -71,6 +72,7 @@ export default function ProductsList() {
                                                         "increase",
                                                     )
                                                 }
+                                                aria-label={`Increase quantity of ${product.product.title}`}
                                                 className="text-xl text-pure-black cursor-pointer w-8 h-full flex items-center justify-center hover:bg-highlight transition-colors"
                                             >
                                                 +

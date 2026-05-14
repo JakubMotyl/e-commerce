@@ -90,24 +90,27 @@ export default function Navbar({ homePage }: { homePage: boolean }) {
                             <button
                                 onClick={() => setIsOpen(true)}
                                 className="nav-link"
+                                aria-label="Open menu"
                             >
                                 Menu
                             </button>
                         </li>
                         <div
                             className={`fixed z-100 top-0 right-0 transition-all duration-300 ease-in-out h-dvh w-full bg-terracotta flex items-center justify-center
-              ${
-                  isOpen
-                      ? "translate-x-0 opacity-100 visible pointer-events-auto"
-                      : "translate-x-full opacity-0 invisible pointer-events-none"
-              }`}
+                                        ${
+                                            isOpen
+                                                ? "translate-x-0 opacity-100 visible pointer-events-auto"
+                                                : "translate-x-full opacity-0 invisible pointer-events-none"
+                                        }`}
                         >
                             <div className="absolute top-5 left-5">
-                                <IoClose
-                                    size={48}
-                                    className="cursor-pointer text-white"
+                                <button
+                                    aria-label="Close menu"
                                     onClick={() => setIsOpen(false)}
-                                />
+                                    className="cursor-pointer"
+                                >
+                                    <IoClose size={48} className="text-white" />
+                                </button>
                             </div>
                             <ul className="flex flex-col divide-y divide-white items-center w-full">
                                 {NAV_LINKS.filter(

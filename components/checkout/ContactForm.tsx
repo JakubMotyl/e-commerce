@@ -91,6 +91,8 @@ function ContactForm() {
                     type="email"
                     placeholder="example@domain.com"
                     value={formData.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    aria-invalid={errors.email ? "true" : "false"}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
@@ -104,7 +106,10 @@ function ContactForm() {
                     }`}
                 />
                 {errors.email && (
-                    <span className="text-red-500 text-xs mt-1">
+                    <span
+                        id="email-error"
+                        className="text-red-500 text-xs mt-1"
+                    >
                         {errors.email}
                     </span>
                 )}
@@ -122,6 +127,10 @@ function ContactForm() {
                     type="text"
                     placeholder="First Name"
                     value={formData.firstName}
+                    aria-describedby={
+                        errors.firstName ? "firstName-error" : undefined
+                    }
+                    aria-invalid={errors.firstName ? "true" : "false"}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
@@ -135,7 +144,10 @@ function ContactForm() {
                     }`}
                 />
                 {errors.firstName && (
-                    <span className="text-red-500 text-xs mt-1">
+                    <span
+                        id="firstName-error"
+                        className="text-red-500 text-xs mt-1"
+                    >
                         {errors.firstName}
                     </span>
                 )}
@@ -153,6 +165,10 @@ function ContactForm() {
                     type="text"
                     placeholder="Last Name"
                     value={formData.lastName}
+                    aria-describedby={
+                        errors.lastName ? "lastName-error" : undefined
+                    }
+                    aria-invalid={errors.lastName ? "true" : "false"}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
@@ -166,7 +182,10 @@ function ContactForm() {
                     }`}
                 />
                 {errors.lastName && (
-                    <span className="text-red-500 text-xs mt-1">
+                    <span
+                        id="lastName-error"
+                        className="text-red-500 text-xs mt-1"
+                    >
                         {errors.lastName}
                     </span>
                 )}
@@ -175,15 +194,19 @@ function ContactForm() {
             <div className="flex flex-col gap-1.5 mt-4">
                 <label
                     className="text-xs font-semibold uppercase text-pure-black"
-                    htmlFor="adress"
+                    htmlFor="address"
                 >
                     Address
                 </label>
                 <input
-                    id="adress"
+                    id="address"
                     type="text"
                     placeholder="Street Address"
                     value={formData.address}
+                    aria-describedby={
+                        errors.address ? "address-error" : undefined
+                    }
+                    aria-invalid={errors.address ? "true" : "false"}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
@@ -196,8 +219,11 @@ function ContactForm() {
                             : "border-terracotta/30 focus:border-terracotta"
                     }`}
                 />
-                {errors.adress && (
-                    <span className="text-red-500 text-xs mt-1">
+                {errors.address && (
+                    <span
+                        id="address-error"
+                        className="text-red-500 text-xs mt-1"
+                    >
                         {errors.adress}
                     </span>
                 )}
@@ -237,6 +263,8 @@ function ContactForm() {
                     type="text"
                     placeholder="City"
                     value={formData.city}
+                    aria-describedby={errors.city ? "city-error" : undefined}
+                    aria-invalid={errors.city ? "true" : "false"}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
@@ -250,7 +278,7 @@ function ContactForm() {
                     }`}
                 />
                 {errors.city && (
-                    <span className="text-red-500 text-xs mt-1">
+                    <span id="city-error" className="text-red-500 text-xs mt-1">
                         {errors.city}
                     </span>
                 )}
@@ -268,6 +296,10 @@ function ContactForm() {
                     type="text"
                     placeholder="01-234"
                     value={formData.postalCode}
+                    aria-describedby={
+                        errors.postalCode ? "postalCode-error" : undefined
+                    }
+                    aria-invalid={errors.postalCode ? "true" : "false"}
                     maxLength={6}
                     onChange={(e) => {
                         const onlyNumbers = e.target.value
@@ -297,7 +329,10 @@ function ContactForm() {
                     }`}
                 />
                 {errors.postalCode && (
-                    <span className="text-red-500 text-xs mt-1">
+                    <span
+                        id="postalCode-error"
+                        className="text-red-500 text-xs mt-1"
+                    >
                         {errors.postalCode}
                     </span>
                 )}
