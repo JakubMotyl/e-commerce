@@ -16,5 +16,18 @@ model Coupon {
   id String @id @default(uuid())
   name String @unique
   discount Int
-  
+}
+
+model Order {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  orderNumber Int @unique @default(autoincrement())
+  firstName String 
+  lastName String
+  email String
+  city String
+  postalCode String
+  address String
+  apartment String?
+  price Int
 }

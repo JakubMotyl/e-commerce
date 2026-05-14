@@ -1,55 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import {
-    isValidEmail,
-    hasMinLength,
-    isValidPostalCode,
-} from "@/utils/validators";
+import { validateForm } from "@/utils/validators";
+import { useCartStore } from "@/store/useCartStore";
+import type { formData } from "@/types";
+import { useRouter } from "next/navigation";
 
 function ContactForm() {
-    const emptyFormData = {
+    const emptyFormData: formData = {
         firstName: "",
         lastName: "",
         email: "",
-        adress: "",
+        address: "",
         apartment: "",
         city: "",
         postalCode: "",
     };
-    const [formData, setFormData] = useState(emptyFormData);
 
+    // Get total price of products after discount and convert to Int
+    // eg. $44.97 -> 4497 in database
+    const getTotals = useCartStore((state) => state.getTotals);
+    const finalTotal = Number(getTotals().finalTotal) * 100;
+    const [formData, setFormData] = useState<formData>(emptyFormData);
     const [errors, setErrors] = useState<Record<string, string>>({});
 
-    const validateForm = () => {
-        const newErrors: Record<string, string> = {};
+    // Init useRouter
+    const router = useRouter();
 
-        if (!isValidEmail(formData.email)) newErrors.email = "Invalid Email";
-
-        if (!isValidPostalCode(formData.postalCode))
-            newErrors.postalCode = "Invalid Postal Code";
-
-        if (!hasMinLength(formData.city, 2)) newErrors.city = "Invalid City";
-
-        if (!hasMinLength(formData.firstName, 2))
-            newErrors.firstName = "Invalid First Name";
-
-        if (!hasMinLength(formData.lastName, 2))
-            newErrors.lastName = "Invalid Last Name";
-
-        // Opcjonalnie: upewnijmy się, że ktoś nie zostawił pustej ulicy
-        if (!hasMinLength(formData.adress, 3))
-            newErrors.adress = "Invalid Address";
-
-        // Pole apartment omijamy - jest opcjonalne!
-
-        return newErrors;
-    };
-
-    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const formErrors = validateForm();
+        const formErrors = validateForm(formData);
 
         setErrors(formErrors);
 
@@ -57,7 +38,27 @@ function ContactForm() {
             return;
         }
 
-        alert("Zamówienie wysłane!");
+        const completeData = {
+            ...formData,
+            price: finalTotal,
+        };
+
+        try {
+            const response = await fetch("/api/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ formData: completeData }),
+            });
+            if (!response.ok) return;
+
+            const data = await response.json();
+
+            router.push(`/checkout/success?orderId=${data.orderNumber}`);
+        } catch (err) {
+            console.error(err);
+        }
 
         setErrors({});
         setFormData(emptyFormData);
@@ -175,15 +176,15 @@ function ContactForm() {
                     id="adress"
                     type="text"
                     placeholder="Street Address"
-                    value={formData.adress}
+                    value={formData.address}
                     onChange={(e) =>
                         setFormData({
                             ...formData,
-                            adress: e.target.value,
+                            address: e.target.value,
                         })
                     }
                     className={`w-full border p-3 text-sm outline-none transition-colors text-pure-black placeholder:text-gray/50 ${
-                        errors.adress
+                        errors.address
                             ? "border-red-500 focus:border-red-500"
                             : "border-terracotta/30 focus:border-terracotta"
                     }`}

@@ -2,9 +2,15 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-export default function CheckoutSuccessPage() {
-    // Opcjonalnie: wygeneruj tu losowy numer zamówienia,
-    // np. const orderNumber = Math.floor(Math.random() * 90000) + 10000;
+interface PageProps {
+    searchParams: Promise<{
+        orderId?: string;
+    }>;
+}
+
+export default async function CheckoutSuccessPage({ searchParams }: PageProps) {
+    const resolvedParams = await searchParams;
+    const orderNumber = resolvedParams.orderId || "N/A";
 
     return (
         <>
@@ -20,7 +26,7 @@ export default function CheckoutSuccessPage() {
                     <p>
                         Order{" "}
                         <span className="font-bold text-pure-black">
-                            #84729
+                            #{orderNumber}
                         </span>{" "}
                         has been placed successfully.
                     </p>
